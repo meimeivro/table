@@ -1,5 +1,3 @@
--- Table is a tool designed for developers to find vulnerabilities in their scripts.
--- It is not meant to be used for malicious purposes. We do not condone or endorse it.
 --[[
   If you are using an executor with a Low UNC (Unified Naming Convention), the script could not work or break.
   
@@ -7,21 +5,29 @@
   TL;DR - UNC is a Roblox executor compatibility standard that shows which functions it supports. 
 ]]
   -- Version 1.0.0
-
+  -- https://raw.githubusercontent.com/meimeivro/table/refs/heads/main/version.lua --
+  -- https://raw.githubusercontent.com/meimeivro/table/refs/heads/main/table.lua --
 local UserInputService = game:GetService("UserInputService") 
-local GuiService = game:GetService("GuiService") -- Maybe useful later
-local env = getenv()
-env.Version = "1.0.0"
+local Version = "1.0.0"
+local scriptVersion = game:HttpGet("https://raw.githubusercontent.com/meimeivro/table/refs/heads/main/version.lua")
 
-pcall(function() 
+local success, error = pcall(function() 
    local executor = identifyexecutor()
-   if executor == "Xeno" or executor == "Solara" then
+   if string.find(executor, "Xeno") or string.find(executor, "Solara") then
          game.StarterGui:SetCore("SendNotification",{ Title = "Low UNC", Text = "Your executor does not support most executor functions.", Duration = 10})
-         warn("Your executor does not support most executor functions, which could break the entire script. Best to upgrade your executor.")
+         warn("Your executor does not support most executor functions, which could break the entire script. Change your executor to an executor with over 80% of UNC.")
    elseif UserInputService.TouchEnabled then
       game.Players.LocalPlayer:Kick("Please use a different device other than mobile.")
    else
       print("You are good to go!")
-      loadstring(game:HttpGet("https://raw.githubusercontent.com/meimeivro/table/refs/heads/main/version.lua"))()
    end
+end)
+
+pcall(function()
+   if Version == string.gsub(scriptVersion, "%s+", "") then
+      print("Version has been matched, ")
+     loadstring(game:HttpGet("https://raw.githubusercontent.com/meimeivro/table/refs/heads/main/table.lua"))()
+   else
+         error("Version mismatch!")
+    end
 end)
