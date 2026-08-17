@@ -25,7 +25,7 @@ end)
 
 pcall(function()
    if Version == string.gsub(scriptVersion, "%s+", "") then
-      print("Version has been matched, ")
+      print("Version has been matched")
      loadstring(game:HttpGet("https://raw.githubusercontent.com/meimeivro/table/refs/heads/main/table.lua"))()
    else
          error("Version mismatch!")
