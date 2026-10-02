@@ -17,7 +17,7 @@ local success, error = pcall(function()
          game.StarterGui:SetCore("SendNotification",{ Title = "Low UNC", Text = "Your executor does not support most executor functions.", Duration = 10})
          warn("Your executor does not support most executor functions, which could break the entire script. Change your executor to an executor with over 80% of UNC.")
    elseif UserInputService.TouchEnabled then
-      game.Players.LocalPlayer:Kick("Please use a different device other than mobile.")
+      game.Players.LocalPlayer:Kick("Please use a different device.")
    else
       print("You are good to go!")
    end
